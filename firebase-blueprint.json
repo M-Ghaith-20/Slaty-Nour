@@ -1,0 +1,41 @@
+{
+  "entities": {
+    "UserData": {
+      "title": "User Data",
+      "description": "Stores user-specific data like dhikr progress, prayer tracking, and custom duas.",
+      "type": "object",
+      "properties": {
+        "dhikrProgress": {
+          "type": "object",
+          "description": "Progress of dhikr counts."
+        },
+        "trackerData": {
+          "type": "object",
+          "description": "Daily prayer tracking status."
+        },
+        "customDuas": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "text": { "type": "string" },
+              "count": { "type": "number" }
+            }
+          }
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["dhikrProgress", "trackerData", "customDuas"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/data/main": {
+      "schema": "UserData",
+      "description": "The main data document for a user."
+    }
+  }
+}
